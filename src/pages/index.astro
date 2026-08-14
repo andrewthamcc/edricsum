@@ -1,7 +1,31 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Information from "../components/information.astro";
+import Guestbook from "../components/guestbook.astro";
+import Gallery from "../components/gallery.astro";
+import NavLink from "../components/nav-link.astro";
+
+const url = new URL(Astro.request.url);
+const currentTab = url.searchParams.get("tab") || "main";
 ---
 
 <Layout>
-  <h1 class="text-3xl">Edric Sum</h1>
+  <!-- TAB 1: MAIN -->
+  {
+    currentTab === "main" && (
+      <section class="space-y-6">
+        <div class="flex aspect-4/3 items-center justify-center rounded-2xl bg-stone-200 font-sans text-sm text-stone-400">
+          <span>[ Photo Placeholder ]</span>
+        </div>
+
+        <article class="prose prose-stone max-w-none space-y-4 text-lg leading-relaxed text-stone-700">
+          <p>[ Add obituary and story content here ]</p>
+        </article>
+      </section>
+    )
+  }
+
+  {currentTab === "funeral" && <Information />}
+  {currentTab === "guestbook" && <Guestbook />}
+  {currentTab === "gallery" && <Gallery />}
 </Layout>

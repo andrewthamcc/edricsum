@@ -1,5 +1,9 @@
 ---
 import "../styles/global.css";
+import NavLink from "../components/nav-link.astro";
+
+const url = new URL(Astro.request.url);
+const currentTab = url.searchParams.get("tab") || "main";
 ---
 
 <!doctype html>
@@ -11,7 +15,46 @@ import "../styles/global.css";
     <title>In Memory of Edric Sum</title>
   </head>
   <body
-    class="flex min-h-screen items-center justify-center bg-stone-50 p-4 font-sans text-stone-800"
-    ><slot /></body
+    class="flex min-h-screen flex-col bg-stone-50 p-2 font-sans text-stone-800 md:p-4"
   >
+    <header class="mb-8 space-y-2 text-center">
+      <h1 class="text-3xl font-medium text-stone-900 sm:text-4xl">Edric Sum</h1>
+      <p class="font-sans text-xs tracking-widest text-stone-500 uppercase">
+        In Loving Memory
+      </p>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav
+      class="mb-8 grid w-full grid-cols-4 border-b border-stone-200 text-center font-sans text-sm font-medium md:mx-auto md:max-w-1/2"
+    >
+      <NavLink
+        href="/?tab=main"
+        isCurrentTab={currentTab === "main"}
+        icon="mdi:home"
+        nav="Main"
+      />
+      <NavLink
+        href="/?tab=funeral"
+        isCurrentTab={currentTab === "funeral"}
+        icon="mdi:info"
+        nav="Funeral Information"
+      />
+      <NavLink
+        href="/?tab=guestbook"
+        isCurrentTab={currentTab === "guestbook"}
+        icon="mdi:book-open-variant-outline"
+        nav="Guestbook"
+      />
+      <NavLink
+        href="/?tab=gallery"
+        isCurrentTab={currentTab === "gallery"}
+        icon="mdi:photo-album"
+        nav="Gallery"
+      />
+    </nav>
+    <div class="mx-auto w-full md:max-w-1/2">
+      <slot />
+    </div>
+  </body>
 </html>

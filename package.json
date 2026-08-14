@@ -13,8 +13,10 @@
   },
   "dependencies": {
     "@astrojs/netlify": "^8.2.1",
+    "@iconify-json/mdi": "^1.2.3",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.2.1",
+    "astro-icon": "^1.1.5",
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
