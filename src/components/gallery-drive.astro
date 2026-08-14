@@ -1,0 +1,62 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<section
+  class="space-y-4 rounded-2xl border border-stone-200 bg-white p-4 font-sans shadow-sm sm:p-6"
+>
+  <!-- Header & Actions -->
+  <div
+    class="flex flex-col justify-between gap-3 text-center sm:flex-row sm:items-center sm:text-left"
+  >
+    <div>
+      <h2 class="font-serif text-xl font-medium text-stone-900 sm:text-2xl">
+        Shared Photos
+      </h2>
+      <p class="text-xs text-stone-500">
+        Upload your photos to share with the family and friends
+      </p>
+    </div>
+
+    <!-- Mobile-Friendly Action Buttons -->
+    <div class="flex items-center justify-center gap-2">
+      <a
+        href="https://drive.google.com/drive/folders/1g6BOQkBD2SfVskyQWAR6wkaq2s46itpC"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1.5 rounded-md bg-stone-900 px-3.5 py-2 text-xs font-medium text-white shadow-xs transition-colors hover:bg-stone-800"
+      >
+        <Icon name="mdi:plus" />
+        Upload Photos
+      </a>
+
+      <!-- Direct App Link for Mobile -->
+      <a
+        href="https://drive.google.com/drive/folders/1g6BOQkBD2SfVskyQWAR6wkaq2s46itpC"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1.5 rounded-md border border-stone-200 bg-stone-50 px-3 py-2 text-xs font-medium text-stone-700 transition-colors hover:bg-stone-100"
+        title="Open in Drive App"
+      >
+        <Icon name="mdi:external-link" />
+        Open App
+      </a>
+    </div>
+  </div>
+
+  <!-- Mobile-Optimized Iframe Container -->
+  <div
+    class="relative h-[60vh] max-h-[600px] min-h-[380px] w-full overflow-hidden rounded-xl border border-stone-200 bg-stone-50 shadow-inner"
+  >
+    <iframe
+      src="https://drive.google.com/embeddedfolderview?id=1g6BOQkBD2SfVskyQWAR6wkaq2s46itpC#grid"
+      class="h-full w-full rounded-xl border-0"
+      title="Shared Google Drive Photos"
+      loading="lazy"></iframe>
+  </div>
+
+  <p class="text-center text-xs text-stone-400">
+    Having trouble viewing on your phone? Tap "Upload Photos" to open directly
+    in Google Drive.
+  </p>
+</section>

@@ -54,7 +54,7 @@ const shuffledImages = shuffleArray(IMAGES);
       shuffledImages.map((img, index) => (
         <button
           type="button"
-          class="gallery-trigger aspect-square overflow-hidden rounded-xl bg-stone-100 shadow-2xs focus:outline-none focus:ring-2 focus:ring-stone-400 group cursor-pointer text-left"
+          class="gallery-trigger aspect-square overflow-hidden-md bg-stone-100 shadow-2xs focus:outline-none focus:ring-2 focus:ring-stone-400 group cursor-pointer text-left"
           data-src={img.src}
           aria-label={`View photo ${index + 1}`}
         >
@@ -94,7 +94,7 @@ const shuffledImages = shuffleArray(IMAGES);
       id="modal-image"
       src=""
       alt="Expanded gallery memory"
-      class="max-h-[85vh] max-w-[90vw] rounded-lg object-contain shadow-2xl"
+      class="max-h-[85vh] max-w-[90vw] rounded-md object-contain shadow-2xl"
     />
   </div>
 </dialog>

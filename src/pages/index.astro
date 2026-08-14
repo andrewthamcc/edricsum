@@ -5,20 +5,20 @@ import Guestbook from "../components/guestbook.astro";
 import Gallery from "../components/gallery.astro";
 import { Image } from "astro:assets";
 import Main from "../assets/main.jpg";
+import GalleryDrive from "../components/gallery-drive.astro";
 
 const url = new URL(Astro.request.url);
 const currentTab = url.searchParams.get("tab") || "main";
 ---
 
 <Layout>
-  <!-- TAB 1: MAIN -->
   {
     currentTab === "main" && (
       <section class="space-y-6 md:py-10">
         <div class="w-full overflow-hidden rounded-2xl shadow-sm">
           <Image
             src={Main}
-            alt="Edric Sum"
+            alt="Edric Sum at his 80th birthday lunch"
             widths={[400, 800, 1200, 1600]}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1200px"
             class="aspect-[4/5] w-full object-cover object-[88%_20%] sm:aspect-[16/9] sm:object-center md:aspect-[21/10]"
@@ -88,5 +88,12 @@ const currentTab = url.searchParams.get("tab") || "main";
 
   {currentTab === "funeral" && <Information />}
   {currentTab === "guestbook" && <Guestbook />}
-  {currentTab === "gallery" && <Gallery />}
+  {
+    currentTab === "gallery" && (
+      <div class="space-y-8">
+        <Gallery />
+        <GalleryDrive />
+      </div>
+    )
+  }
 </Layout>
