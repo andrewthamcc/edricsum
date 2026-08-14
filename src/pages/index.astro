@@ -3,7 +3,8 @@ import Layout from "../layouts/Layout.astro";
 import Information from "../components/information.astro";
 import Guestbook from "../components/guestbook.astro";
 import Gallery from "../components/gallery.astro";
-import NavLink from "../components/nav-link.astro";
+import { Image } from "astro:assets";
+import Main from "../assets/main.jpg";
 
 const url = new URL(Astro.request.url);
 const currentTab = url.searchParams.get("tab") || "main";
@@ -14,8 +15,14 @@ const currentTab = url.searchParams.get("tab") || "main";
   {
     currentTab === "main" && (
       <section class="space-y-6">
-        <div class="flex aspect-4/3 items-center justify-center rounded-2xl bg-stone-200 font-sans text-sm text-stone-400">
-          <span>[ Photo Placeholder ]</span>
+        <div class="w-full overflow-hidden rounded-2xl shadow-sm">
+          <Image
+            src={Main}
+            alt="Edric Sum 80th birthday lunch"
+            widths={[400, 800, 1200, 1600]}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1200px"
+            class="aspect-[4/5] w-full object-cover object-[15%_65%] sm:aspect-[16/9] sm:object-center md:aspect-[21/10]"
+          />
         </div>
 
         <article class="prose prose-stone max-w-none space-y-4 text-lg leading-relaxed text-stone-700">
