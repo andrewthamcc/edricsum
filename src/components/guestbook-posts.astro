@@ -1,0 +1,90 @@
+<div
+  class="space-y-6 rounded-2xl border border-stone-200 bg-stone-50/50 bg-white p-6 shadow-sm"
+>
+  <div
+    class="flex items-center justify-between border-b border-stone-200/80 pb-4"
+  >
+    <h2 class="font-serif text-2xl font-medium text-stone-900">
+      Tributes & Memories
+    </h2>
+  </div>
+
+  <div id="tributes-feed" class="space-y-4">
+    <p class="py-4 text-center text-sm text-stone-400 italic">
+      Loading tributes...
+    </p>
+  </div>
+</div>
+
+<script>
+  import { db } from "../lib/firebase";
+  import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
+
+  function escapeHTML(str: string) {
+    return str.replace(
+      /[&<>'"]/g,
+      (tag) =>
+        ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          "'": "&#39;",
+          '"': "&quot;",
+        })[tag] || tag,
+    );
+  }
+
+  const tributesList = document.getElementById("tributes-feed");
+  const tributeCount = document.getElementById("tribute-count");
+
+  if (tributesList) {
+    const guestbookRef = collection(db, "guestbook");
+    const q = query(guestbookRef, orderBy("timestamp", "desc"));
+
+    onSnapshot(
+      q,
+      (snapshot) => {
+        if (snapshot.empty) {
+          if (tributeCount) tributeCount.textContent = "0 entries";
+          tributesList.innerHTML = `<p class="text-stone-500 text-sm text-center py-6">No memories shared yet</p>`;
+          return;
+        }
+
+        if (tributeCount) {
+          tributeCount.textContent = `${snapshot.docs.length} ${snapshot.docs.length === 1 ? "entry" : "entries"}`;
+        }
+
+        const entries = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        tributesList.innerHTML = entries
+          .map((entry: any) => {
+            const dateStr = entry.timestamp?.toDate
+              ? entry.timestamp.toDate().toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                  year: "numeric",
+                })
+              : "Just now";
+
+            return `
+              <article class="bg-white p-5 rounded-xl border border-stone-200/80 shadow-xs space-y-2">
+                <div class="flex items-baseline justify-between border-b border-stone-100 pb-2">
+                  <h4 class="text-stone-900 font-medium text-base">${escapeHTML(entry.name || "Anonymous")}</h4>
+                  <time class="text-stone-400 text-xs">${dateStr}</time>
+                </div>
+                <p class="text-stone-700 font-serif text-base leading-relaxed whitespace-pre-line pt-1">${escapeHTML(entry.message || "")}</p>
+              </article>
+            `;
+          })
+          .join("");
+      },
+      (error) => {
+        console.error("Firestore Listener Error:", error);
+        tributesList.innerHTML = `<p class="text-rose-600 text-xs py-4 text-center">Unable to load messages right now.</p>`;
+      },
+    );
+  }
+</script>
