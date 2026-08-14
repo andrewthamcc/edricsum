@@ -1,0 +1,103 @@
+<div class="mx-auto max-w-4/5 space-y-4">
+  <h3 class="font-serif text-xl font-medium text-stone-900">Leave a Tribute</h3>
+
+  <form
+    id="guestbook-form"
+    name="guestbook"
+    method="POST"
+    data-netlify="true"
+    data-netlify-honeypot="bot-field"
+    class="space-y-4"
+  >
+    <!-- Required hidden inputs for Netlify -->
+    <input type="hidden" name="form-name" value="guestbook" />
+
+    <!-- Honeypot field to block spam bots -->
+    <p class="hidden">
+      <label
+        >Don't fill this out if you're human: <input name="bot-field" /></label
+      >
+    </p>
+
+    <div>
+      <label
+        for="name"
+        class="mb-1 block text-left text-xs font-semibold tracking-wider text-stone-500 uppercase"
+      >
+        Your Name
+      </label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        required
+        class="w-full rounded-md border border-stone-300 px-3.5 py-2 text-sm text-stone-800 focus:border-stone-900 focus:outline-none"
+        placeholder="e.g., Sarah & Family"
+      />
+    </div>
+
+    <div>
+      <label
+        for="message"
+        class="mb-1 block text-left text-xs font-semibold tracking-wider text-stone-500 uppercase"
+      >
+        Tribute or Memory
+      </label>
+      <textarea
+        id="message"
+        name="message"
+        rows="10"
+        required
+        class="w-full rounded-md border border-stone-300 px-3.5 py-2 text-sm text-stone-800 focus:border-stone-900 focus:outline-none"
+        placeholder="Share a favorite story or words of comfort..."></textarea>
+    </div>
+
+    <div class="flex items-center justify-between pt-1">
+      <button
+        type="submit"
+        class="rounded-md bg-stone-900 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-black"
+      >
+        Submit Message
+      </button>
+      <span id="form-status" class="hidden text-xs text-stone-500"></span>
+    </div>
+  </form>
+</div>
+
+<script>
+  // Handle submission with fetch so the page doesn't refresh
+  const form = document.getElementById("guestbook-form") as HTMLFormElement;
+  const status = document.getElementById("form-status");
+
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      if (status) {
+        status.textContent = "Sending...";
+        status.classList.remove("hidden");
+      }
+
+      const formData = new FormData(form);
+
+      try {
+        await fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams(formData as any).toString(),
+        });
+
+        form.reset();
+        if (status) {
+          status.textContent = "Thank you. Your tribute has been received.";
+          status.className = "text-xs text-emerald-700 font-medium";
+        }
+      } catch (err) {
+        if (status) {
+          status.textContent = "Something went wrong. Please try again.";
+          status.className = "text-xs text-rose-600 font-medium";
+        }
+      }
+    });
+  }
+</script>
