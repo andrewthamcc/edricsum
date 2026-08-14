@@ -14,19 +14,73 @@ const currentTab = url.searchParams.get("tab") || "main";
   <!-- TAB 1: MAIN -->
   {
     currentTab === "main" && (
-      <section class="space-y-6">
+      <section class="space-y-6 md:py-10">
         <div class="w-full overflow-hidden rounded-2xl shadow-sm">
           <Image
             src={Main}
-            alt="Edric Sum 80th birthday lunch"
+            alt="Edric Sum"
             widths={[400, 800, 1200, 1600]}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1200px"
-            class="aspect-[4/5] w-full object-cover object-[15%_65%] sm:aspect-[16/9] sm:object-center md:aspect-[21/10]"
+            class="aspect-[4/5] w-full object-cover object-[88%_20%] sm:aspect-[16/9] sm:object-center md:aspect-[21/10]"
           />
         </div>
 
         <article class="prose prose-stone max-w-none space-y-4 text-lg leading-relaxed text-stone-700">
-          <p>[ Add obituary and story content here ]</p>
+          <p>
+            It is with deep sadness that we share the passing of Dr. Edric
+            Chuen-Hong Sum, who passed away at his home in Toronto on August 12,
+            2026.
+          </p>
+
+          <p>
+            Born in Wuhan, China, on July 29, 1946, Edric moved with his family
+            to Hong Kong in 1949 and later graduated from the medical school at
+            The University of Hong Kong in 1970. He immigrated to Canada,
+            completed his medical training in Winnipeg and Hamilton, and
+            ultimately made Mississauga his home, where he established his
+            family practice in 1974. Over an extraordinary 47-year career, he
+            served the community with dedication, compassion, and unwavering
+            commitment before retiring in 2021.
+          </p>
+
+          <p>
+            Edric shared many meaningful chapters in his life with those he
+            loved. He married Amy Tin-Chi Wong in 1975, and together they raised
+            two daughters. In 2013, he married Carol Pui-Wah Lo, with whom he
+            enjoyed 13 happy years filled with love and cherished memories.
+          </p>
+
+          <p>
+            Beyond his medical profession, Edric embraced life with enthusiasm
+            and curiosity. He enjoyed reading, singing, motorsports, skiing,
+            canoeing, tennis, and travel. A devoted member of St. John's
+            Anglican Church Willowdale, he contributed actively to the choir,
+            book club, and community garden. Those who knew him will remember
+            his strong faith, generosity of spirit, love of music, outgoing
+            personality, and lifelong pursuit of learning.
+          </p>
+
+          <p>
+            Edric is survived by his wife, Carol; his daughters, Erica (Babak)
+            and Denise (Andrew); his stepdaughters, Shellen and Shereen
+            (Jonathan, children Allegra and Ethan); and his brothers, Robert
+            (Peggy) and Cedric (Eliza). He will be deeply missed by his family,
+            friends, patients, and all whose lives he touched.
+          </p>
+
+          <p>
+            A memorial service will be held on Wednesday, August 19, 2026, at
+            11:00 a.m. at Highland Hills Funeral Home, 12492 Woodbine Avenue,
+            Gormley, Ontario. Visitation will begin at 10:00 a.m., with a
+            luncheon to follow. All who knew and loved Edric are warmly invited
+            to join in celebrating his life and honoring his memory.
+          </p>
+
+          <p>
+            Our thoughts and heartfelt condolences are with Edric's family and
+            loved ones during this difficult time. May his memory continue to
+            inspire all who had the privilege of knowing him.
+          </p>
         </article>
       </section>
     )
